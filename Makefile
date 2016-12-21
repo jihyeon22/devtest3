@@ -34,7 +34,7 @@ CFLAGS	+= -lpthread
 LDFLAGS	+=
 
 OBJS	:= src/devtest.o src/ext_uart.o
-APP	:= devtest2
+APP	:= devtest3
 
 all: all-before	$(APP)
 
