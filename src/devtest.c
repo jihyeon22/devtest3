@@ -14,6 +14,14 @@
 
 #include "ext_uart.h"
 
+#include "uart_parser.h"
+#include "uart_tools.h"
+#include "thread_uart.h"
+
+#define LOG_TARGET eSVC_BASE
+
+#include <at/at_util.h>
+
 static int fd = 0;
 
 
@@ -27,6 +35,7 @@ struct cmd_options {
 
 struct cmd_options option = {0,};
 
+/*
 void getoptions(int argc, char* argv[]) 
 {
     int opt;
@@ -47,6 +56,7 @@ void getoptions(int argc, char* argv[])
         }
     }
 }
+*/
 
 int main(int argc, char *argv[])
 {
@@ -69,7 +79,7 @@ int main(int argc, char *argv[])
 #endif
     //log_fd = fopen("/var/log/test.app", "w");
     
-    getoptions(argc, argv);
+//    getoptions(argc, argv);
     
     
     
@@ -98,24 +108,22 @@ int main(int argc, char *argv[])
 	chdir("/");
 #endif
 
-
+/*
     if (option.e)
     {
         printf("ext uart test start....\r\n");
         extuart_test();
     }
-    /*
     else if (option.x)
     {
     
-    }*/
-    
-    else
-    {
-    
     }
+    
+*/
+    at_open(e_DEV_TL500_BASE, NULL,  NULL, NULL);
 
-
+    start_thread_at_cust_uart();
+    
 	// ------------------------------------------------
 	// get network stat
 	// ------------------------------------------------

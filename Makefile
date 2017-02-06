@@ -11,29 +11,23 @@ INITRCDIR	:= /etc/init.d
 ###############################################################################
 # Compile
 
-CC	:= $(CROSS_COMPILE)gcc
+CC = $(CROSS_COMPILE)gcc
+AR = $(CROSS_COMPILE)ar
+RANLIB = $(CROSS_COMPILE)ranlib
 
 CFLAGS	:= $(EXTRA_CFLAGS)
 LDFLAGS	:= $(EXTRA_LDFLAGS)
 
 ###############################################################################
-# Options
-
-#AUTOSTART	:= y
-
-###############################################################################
-# Board
-
-BOARD	:= 
-CFLAGS	+= -DBOARD_$(BOARD)
-
+CFLAGS  += -DBOARD_$(BOARD)
 ###############################################################################
 # Target rules
 
-CFLAGS	+= -lpthread
+CFLAGS	+= 
+LIBS += -lpthread -lmdsapi -lat3 -llogd
 LDFLAGS	+=
 
-OBJS	:= src/devtest.o src/ext_uart.o
+OBJS	:= src/devtest.o src/ext_uart.o src/thread_uart.o src/uart_parser.o src/uart_tools.o
 APP	:= devtest3
 
 all: all-before	$(APP)
@@ -43,7 +37,7 @@ all-before:
 
 
 $(APP):		$(OBJS)
-	$(Q)$(CC) $(CFLAGS) -o $@ $^
+	$(Q)$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
 
 install:	install-binary
 
