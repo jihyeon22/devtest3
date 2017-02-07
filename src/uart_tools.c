@@ -41,6 +41,7 @@ int at_cust_write_uart_append(const char* buff, int buff_len, int flush)
     if ( (flush == WRITE_AND_FLUSH) || (flush == FLUSH_ONLY) )
     {
         at_cust_write_uart(write_buff,write_cnt,SEND_CR);
+        at_cust_write_uart2(write_buff,write_cnt,SEND_CR);
 
         memset(write_buff, 0x00, 512);
         write_cnt = 0;
@@ -54,7 +55,7 @@ int at_cust_ret_echo_ok(const char* cmd, const char* value)
     int offset = 2; // "at" strlen is 2
     char buff[512] = {0,};
 
-    sprintf(buff, "\r\n%s: %s\r\n\r\n",cmd + offset, value);
+    sprintf(buff, "\r\n%s:%s\r\n\r\n",cmd + offset, value);
     at_cust_write_uart_append(buff, strlen(buff), WRITE_APPEND);
     at_cust_write_uart_append("OK\r\n", strlen("OK\r\n") , WRITE_AND_FLUSH);
     //at_cust_write_uart(buff, strlen(buff), SEND_CR);
@@ -67,7 +68,7 @@ int at_cust_ret_echo_err(const char* cmd, const char* value)
     int offset = 2; // "at" strlen is 2
     char buff[512] = {0,};
 
-    sprintf(buff, "\r\n%s: %s\r\n\r\n",cmd+offset, value);
+    sprintf(buff, "\r\n%s:%s\r\n\r\n",cmd+offset, value);
     at_cust_write_uart_append(buff, strlen(buff), WRITE_APPEND);
     at_cust_write_uart_append("ERROR\r\n", strlen("ERROR\r\n") , WRITE_AND_FLUSH);
     return 0;

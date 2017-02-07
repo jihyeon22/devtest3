@@ -24,10 +24,10 @@ CFLAGS  += -DBOARD_$(BOARD)
 # Target rules
 
 CFLAGS	+= 
-LIBS += -lpthread -lmdsapi -lat3 -llogd
+LIBS += -lpthread -lmdsapi -lat3 -llogd -lm -lrt
 LDFLAGS	+=
 
-OBJS	:= src/devtest.o src/ext_uart.o src/thread_uart.o src/uart_parser.o src/uart_tools.o
+OBJS	:= src/devtest.o src/ext_uart.o src/thread_uart.o src/thread_uart2.o src/uart_parser.o src/uart_tools.o src/thread-btn-pwr.o
 APP	:= devtest3
 
 all: all-before	$(APP)

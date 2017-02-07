@@ -4,6 +4,7 @@
 #define WRITE_UART_MAX_RETRY    10
 
 #define AT_BRIDGE_UART_INVALID_HANDLE       (0xFFABCDEF)
+#define AT_BRIDGE_UART_INVALID_HANDLE2      (0xFFABCDEE)
 
 #define AT_BRIDGE_FAIL      0
 #define AT_BRIDGE_FALSE     0
@@ -21,7 +22,7 @@
 
 
 #define ARG_RET_FAIL                -1
-#define ARG_RET_NORMAL              0   // ¿ÏÀüÈ÷ ÀÏÄ¡ÇÏ´Â ¸í·É¾î
+#define ARG_RET_NORMAL              0   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½É¾ï¿½
 #define ARG_RET_READ_SETTING        1
 #define ARG_RET_READ_SETTING_CHAR   '?'
 #define ARG_RET_SET_VALUE           2

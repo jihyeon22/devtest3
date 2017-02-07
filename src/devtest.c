@@ -16,7 +16,11 @@
 
 #include "uart_parser.h"
 #include "uart_tools.h"
+
 #include "thread_uart.h"
+#include "thread_uart2.h"
+
+#include "thread-btn-pwr.h"
 
 #define LOG_TARGET eSVC_BASE
 
@@ -120,16 +124,23 @@ int main(int argc, char *argv[])
     }
     
 */
+	// tl 500 gpio init
+	export_chk_gpio_num(14);
+	export_chk_gpio_num(13);
+	export_chk_gpio_num(12);
+
     at_open(e_DEV_TL500_BASE, NULL,  NULL, NULL);
 
     start_thread_at_cust_uart();
-    
+	start_thread_at_cust_uart2();
+    start_thread_btn();
+
 	// ------------------------------------------------
 	// get network stat
 	// ------------------------------------------------
 	while(1)
 	{
-        printf(".");
+        //thread_btn_pwr(NULL);
 		sleep(10);
 	}
 
